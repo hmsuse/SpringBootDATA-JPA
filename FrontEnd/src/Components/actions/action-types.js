@@ -1,0 +1,6 @@
+const Types={
+    LOGIN_SUCCESS:'LOGIN_SUCCESS',
+    GET_USERS_LIST:'GET_USERS_LIST',
+    ADD_AND_UPDATE_FLOOR_LIST:'ADD_AND_UPDATE_FLOOR_LIST'
+};
+export  default Types;
