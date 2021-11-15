@@ -56,6 +56,8 @@ const successMethod=()=>{
                     <Column field="firstName" header="First Name"></Column>
                     <Column field="lastName" header="Last Name"></Column>
                     <Column field="email" header="Email"></Column>
+                    <Column field="email" header="Phone Number
+                    "></Column>
                     <Column body={actionTemplate} header="action"></Column>
                 </DataTable>
                 </div>

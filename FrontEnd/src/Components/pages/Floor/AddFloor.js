@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import {AddorUpdateFloor} from '../../actions/homeActions';
+// import {AddorUpdateFloor} from '../../actions/homeActions';
 const AddFloor=(props)=>{
   const [floorName,setFloorName]=useState('')
  useEffect(()=>{

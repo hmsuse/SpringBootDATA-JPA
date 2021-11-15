@@ -91,3 +91,6 @@
   .p-datatable .p-datatable-tbody > tr > td{
     word-break: break-all;
   }
+  .dropdown-menu {
+left: -120px;
+  }

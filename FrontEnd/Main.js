@@ -9,14 +9,17 @@ import Resume from './src/Components/pages/Resume/Resume';
 import Guest from './src/Components/pages/Guestes/Guest'; 
 import FloorsList from './src/Components/pages/Floor/Floors';
  const Main=(props)=>{ 
+        //  const privateRoute=()=>{
+
+        //  }
 return( 
         <div>
          
         <Switch> 
         <Router> 
         {sessionStorage.userName?<Header/>:''}     
-           <Route  path='/' exact component={Login}/>
-           <Route path='/users' component={UsersList}/>
+           <Route exact  path='/'  component={Login}/>
+           <Route exact path='/users' component={UsersList}/>
            
            <Route path='/floors' component={FloorsList}/>
            {/* <Route path='/resume' component={Resume}/> */}
