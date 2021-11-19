@@ -7,6 +7,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.springboot.jpa.entity.UserAccountDetails;
+
+import com.springboot.jpa.reposiroty.UserAccountDetailsRepository;
+
 @SpringBootApplication
 public class SpringBootDataJpaApplication implements CommandLineRunner{
 
@@ -20,9 +24,9 @@ public class SpringBootDataJpaApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-	List<UserAccountdetails> listUser=repo.findAll();
+	List<UserAccountDetails> listUser=repo.findAll();
 	if(!listUser.isEmpty()) {
-		for(UserAccountdetails ub:listUser)
+		for(UserAccountDetails ub:listUser)
 		System.out.println("ub--"+ub);
 	}
 	}

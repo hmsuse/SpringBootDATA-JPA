@@ -1,6 +1,4 @@
-package com.springboot.jpa;
-
-import java.util.Date;
+package com.springboot.jpa.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="user_account_details")
-public class UserAccountdetails {
+public class UserAccountDetails {
 @Id
 @GeneratedValue(strategy =GenerationType.IDENTITY)
 @Column(name="user_id")
@@ -29,8 +27,8 @@ private String firstName;
 @Column(name="last_name")
 private String lastName;
 
-@Column(name="middle_name")
-private String middleName;
+//@Column(name="middle_name")
+//private String middleName;
 
 @Column(name="email")
 private String email;
@@ -38,7 +36,17 @@ private String email;
 @Column(name="status_id")
 private int statusId;
 
+@Column(name="usertype_id")
+private int userType;
 
+
+public int getUserType() {
+	return userType;
+}
+
+public void setUserType(int userType) {
+	this.userType = userType;
+}
 
 public int getUser_id() {
 	return user_id;
@@ -82,13 +90,6 @@ public void setLastName(String lastName) {
 
 
 
-public String getMiddleName() {
-	return middleName;
-}
-
-public void setMiddleName(String middleName) {
-	this.middleName = middleName;
-}
 
 
 public int getStatusId() {
@@ -110,4 +111,4 @@ public void setEmail(String email) {
 }
 
 }	
-	
+
