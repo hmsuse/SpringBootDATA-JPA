@@ -28,6 +28,11 @@ const initialState = {
                    ...state,
                    
                 }
+                case Types.ADD_AND_UPDATE_USER:
+                   return{
+                      ...state,
+                      
+                   }
        default:
           return state;
     }

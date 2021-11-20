@@ -48,10 +48,10 @@ const successMethod=()=>{
          
             <div className="m-4 pt-3">
                 <div className=''>
-                <button className="btn btn-primary " onClick={createUser}> Add User</button> 
+                <button className="btn btn-primary" onClick={createUser}> Add User</button> 
                 </div>
-            <div>
-                <DataTable value={props.getUsersDetails}>
+            <div className=''>
+                <DataTable  value={props.getUsersDetails}>
                     <Column field="userName" header="User Name"></Column>
                     <Column field="firstName" header="First Name"></Column>
                     <Column field="lastName" header="Last Name"></Column>

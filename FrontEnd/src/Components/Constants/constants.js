@@ -8,7 +8,8 @@ const constants={
 },
 api:{
     siginin:url+'/login',
-    getUsersData:url+'/getUsersData'
+    getUsersData:url+'/getUsersData',
+    addUpdateOfUser:url+'/addUpdateOfUser'
 }
 }
 export default constants;

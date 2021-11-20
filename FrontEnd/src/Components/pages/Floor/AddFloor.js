@@ -35,4 +35,4 @@ const mapStateToProps=state=>({
 const mapDispatchToProps=dispatch=>({
     AddorUpdateFloor:(data)=>dispatch(AddorUpdateFloor(data))
 })
-export default connect(mapStateToProps,mapDispatchToProps) (AddFloor);
+export default connect(mapStateToProps,mapDispatchToProps)(AddFloor);

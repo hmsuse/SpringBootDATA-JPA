@@ -8,10 +8,12 @@ import Footer from './src/Components/pages/Footer/Footer';
 import Resume from './src/Components/pages/Resume/Resume';
 import Guest from './src/Components/pages/Guestes/Guest'; 
 import FloorsList from './src/Components/pages/Floor/Floors';
+   const privateRoute=({component:Component,...rest})=>(
+           <Route {...rest} render={props=>(token !==null &&token!==undefined?
+               <Component/> :<Redirect exact/>)}/>
+   );
  const Main=(props)=>{ 
-        //  const privateRoute=()=>{
-
-        //  }
+      
 return( 
         <div>
          

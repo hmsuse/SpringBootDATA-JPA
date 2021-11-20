@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import {addAndUpdateUsers} from '../actions/homeActions'
 const CreateUser=(props)=>{
-  const [user,setUser]=useState({userName:'',firstName:'',lastName:'',userType:'',email:'',phoneNumber:''})
+  const [user,setUser]=useState({userName:'',firstName:'',lastName:'',userType:'',email:'',phoneNo:''})
  useEffect(()=>{
 
  },[])
@@ -15,16 +17,17 @@ const changeLastNameHandler=(e)=>{
   setUser({...user,lastName:e.target.value})
 }
 const changeUserTypeHandler=(e)=>{
-  setUser({...user,userType:e.target.value})
+  setUser({...user,userType:Number(e.target.value)})
 }
 const changeEmailHandler=(e)=>{
   setUser({...user,email:e.target.value})
 }
 const changephoneNumberHandler=(e)=>{
-  setUser({...user,phoneNumber:e.target.value})
+  setUser({...user,phoneNo:e.target.value})
 } 
 const onSubmitHandler=()=>{
   console.log(user)
+  props.addAndUpdateUsers(user);
 }
     return(
         <div>
@@ -47,8 +50,8 @@ const onSubmitHandler=()=>{
        <label for="sel1">User Type:</label>
        <select class="form-control" onChange={changeUserTypeHandler} value={user.userType}>
        <option>select User</option>
-      <option>Admin</option>
-      <option>Accountant</option> 
+      <option value='1'>Admin</option>
+      <option value='2'>Accountant</option> 
      </select>
      </div>
     </div> 
@@ -59,7 +62,7 @@ const onSubmitHandler=()=>{
    </div>
    <div class="form-group col-sm-6">
    <label for="usr">Phone Number:</label>
-   <input type="number" name='phno' onChange={changephoneNumberHandler} value={user.phoneNumber} placeholder='Phone Number' class="form-control"/>
+   <input type="number" name='phno' onChange={changephoneNumberHandler} value={user.phoneNo} placeholder='Phone Number' class="form-control"/>
    </div>
    </div> 
    <div className='float-right'>
@@ -69,4 +72,10 @@ const onSubmitHandler=()=>{
   </div> 
     );
 }
-export default CreateUser;
+const mapStateToProps=(state)=>({
+
+})
+const mapDispatchToProps=(dispatch)=>({
+  addAndUpdateUsers:(data)=>dispatch(addAndUpdateUsers(data)),
+})
+export default connect(mapStateToProps,mapDispatchToProps) (CreateUser);
