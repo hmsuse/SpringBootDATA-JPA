@@ -15,6 +15,9 @@ public interface UserAccountDetailsRepository extends JpaRepository<UserAccountD
 	
 	@Query(nativeQuery = true ,value="select * from user_account_details where user_name=?")
 	public UserAccountDetails findByName(@Param("username") String userName);
+
+	@Query(nativeQuery = true ,value="select * from user_account_details where user_id=?")
+	public UserAccountDetails findByUserId(@Param("userid") int parseInt);
 	
 
 }
