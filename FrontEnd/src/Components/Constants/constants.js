@@ -9,7 +9,9 @@ const constants={
 api:{
     siginin:url+'/login',
     getUsersData:url+'/getUsersData',
-    addUpdateOfUser:url+'/addUpdateOfUser'
+    addUpdateOfUser:url+'/addUpdateOfUser',
+    editUser:url+'/editUser',
+    deleteUser:url+'/deleteUser'
 }
 }
 export default constants;

@@ -33,6 +33,16 @@ const initialState = {
                       ...state,
                       
                    }
+                   case Types.EDIT_USER:
+                      console.log(action); 
+                      return{
+                         ...state,
+                         geteditUserDetails:action.res
+                      }
+                      case Types.DELETE_USER:
+                         return{
+                            ...state,
+                         }
        default:
           return state;
     }

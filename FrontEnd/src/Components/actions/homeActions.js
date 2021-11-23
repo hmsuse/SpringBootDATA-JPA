@@ -23,7 +23,21 @@ const getUsersList= () => {
 const addAndUpdateUsers=(data)=>{
     return function(dispatch){
         axios.post(constants.api.addUpdateOfUser+`?action=create`,data)
-        .then(res=>dispatch({tupe:Types.ADD_AND_UPDATE_USER}))
+        .then(res=>dispatch({tupe:Types.ADD_AND_UPDATE_USER,payload:res.data}))
+        .catch(res=>dispatch(exceptionHandler(res)))
+    }
+}
+const editUsers=(data)=>{
+    return function(dispatch){
+        axios.post(constants.api.editUser+`?userId=${data}`)
+        .then(res=>dispatch({type:Types.EDIT_USER,res:res.data}))
+        .catch(res=>dispatch(exceptionHandler(res)))
+    }
+}
+const deleteUsers=(data)=>{
+    return function(dispatch){
+        axios.post(constants.api.deleteUser+`?userId=${data}`)
+        .then(res=>dispatch({tupe:Types.DELETE_USER}))
         .catch(res=>dispatch(exceptionHandler(res)))
     }
 }
@@ -37,5 +51,7 @@ const AddorUpdateFloor=()=>{
 export {
     loginRequest,
     getUsersList,
-    addAndUpdateUsers
+    addAndUpdateUsers,
+    editUsers,
+    deleteUsers
 }

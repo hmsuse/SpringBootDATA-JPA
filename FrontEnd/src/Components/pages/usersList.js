@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column'; 
-import{getUsersList} from '../actions/homeActions'
+import{getUsersList,editUsers} from '../actions/homeActions'
 import { connect } from 'react-redux';
 import ComponentDialog from './DialogBox/ComponentDialog';
 import CreateUser from './CreateUser';
@@ -16,9 +16,10 @@ const UsersList =(props) => {
 props.getUsersList();
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
     const editUser=(data)=>{
+        props.editUsers(data.user_id)
    console.log(data)
    setDialogTitle('Edit User')
-   setShowDialog(true)
+   setShowDialog(true) 
     }
     const deleteUser=(data)=>{
 setShowAlertDialog(true)
@@ -81,8 +82,10 @@ const successMethod=()=>{
 const mapStateToProps=state=>({
     getUsersDetails:state.reducers.getUsersDetails
 })
-const mapDispatchToProps=dispach=>({
-    getUsersList:()=>dispach(getUsersList())
+const mapDispatchToProps=dispatch=>({
+    getUsersList:()=>dispatch(getUsersList()),
+    editUsers:(data)=>dispatch(editUsers(data)),
+    deleteUsers:(id)=>dispatch(deleteUsers(id))
 })
 export default connect(mapStateToProps,mapDispatchToProps)(UsersList);
  

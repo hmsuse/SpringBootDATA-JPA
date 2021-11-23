@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import {addAndUpdateUsers} from '../actions/homeActions'
 const CreateUser=(props)=>{
   const [user,setUser]=useState({userName:'',firstName:'',lastName:'',userType:'',email:'',phoneNo:''})
- useEffect(()=>{
-
- },[])
+//  useEffect(()=>{
+//    console.log(props.geteditUserDetails,user)
+//    console.log(user)
+// setUser(props.geteditUserDetails)
+//  },[props.geteditUserDetails])
  const changeUserNameHandler=(e)=>{
 setUser({...user,userName:e.target.value})
  }
@@ -73,7 +75,7 @@ const onSubmitHandler=()=>{
     );
 }
 const mapStateToProps=(state)=>({
-
+  geteditUserDetails:state.reducers.geteditUserDetails,
 })
 const mapDispatchToProps=(dispatch)=>({
   addAndUpdateUsers:(data)=>dispatch(addAndUpdateUsers(data)),
