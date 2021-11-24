@@ -8,6 +8,9 @@ const exceptionHandler=(res)=>({
 const createUser=()=>({
     type:Types.CREATE_USER,
 
+});
+const nullifyService=()=>({
+    type:Types.NULLIFY_SERVICE,
 })
  const loginRequest = (payload) => {
     return function (dispatch) {
@@ -27,7 +30,12 @@ const getUsersList= () => {
 const addAndUpdateUsers=(data,type)=>{
     return function(dispatch){
         axios.post(constants.api.addUpdateOfUser+`?action=${type}`,data)
-        .then(res=>dispatch({tupe:Types.ADD_AND_UPDATE_USER,payload:res.data}))
+        .then(res=>{
+            dispatch({type:Types.ADD_AND_UPDATE_USER,payload:res.data})  
+            if(res.data.status =='success'){
+dispatch(getUsersList())
+            }
+        })
         .catch(res=>dispatch(exceptionHandler(res)))
     }
 }
@@ -41,7 +49,11 @@ const editUsers=(data)=>{
 const deleteUsers=(data)=>{
     return function(dispatch){
         axios.post(constants.api.deleteUser+`?userId=${data}`)
-        .then(res=>dispatch({tupe:Types.DELETE_USER}))
+        .then(res=>{dispatch({type:Types.DELETE_USER,payload:res.data})
+    if(res.data.status == 'success'){
+        dispatch(getUsersList())
+    }
+    })
         .catch(res=>dispatch(exceptionHandler(res)))
     }
 }
@@ -59,5 +71,6 @@ export {
     addAndUpdateUsers,
     editUsers,
     deleteUsers,
-    createUser
+    createUser,
+    nullifyService
 }
