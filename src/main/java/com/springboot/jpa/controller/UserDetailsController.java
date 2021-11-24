@@ -66,6 +66,7 @@ public class UserDetailsController {
 					ubean.setPassword(used.getPhoneNo());
 					ubean.setPhoneNumber(used.getPhoneNo());
 					ubean.setStatusId(1);
+					userRepo.save(ubean);
 					hm.put("status", "success");
 					hm.put("msg", "User  is updated successfully");
 
@@ -98,9 +99,9 @@ public class UserDetailsController {
 				hm.put("email", ub.getEmail());
 				boolean deleted = ub.getStatusId() == 5 ? true : false;
 				hm.put("deleted", deleted);
-				String userType = ub.getUserType() == 1 ? "admin" : "accountant";
-				hm.put("userType", userType);
-				hm.put("phoneNumber", ub.getPhoneNumber());
+				//String userType = ub.getUserType() == 1 ? "admin" : "accountant";
+				hm.put("userType", ub.getUserType());
+				hm.put("phoneNo", ub.getPhoneNumber());
 				hm.put("status", "success");
 				hm.put("msg", "User  data retrieved successfully");
 
