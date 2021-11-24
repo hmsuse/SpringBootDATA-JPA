@@ -1,56 +1,81 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {addAndUpdateUsers} from '../actions/homeActions'
-const CreateUser=(props)=>{
-  const [user,setUser]=useState({userName:'',firstName:'',lastName:'',userType:'',email:'',phoneNo:''})
-//  useEffect(()=>{
-//    console.log(props.geteditUserDetails,user)
-//    console.log(user)
+const CreateUser=(props)=>{ 
+  const [userName,setUserName]=useState('')
+  const [firstName,setFirstName]=useState('')
+  const [lastName,setLastName]=useState('')
+  const [userType,setUserType]=useState('')
+  const [email,setEmail]=useState('')
+  const [phoneNo,setPhoneNo]=useState('')
+ useEffect(()=>{
+   console.log("io",props.geteditUserDetails) 
 // setUser(props.geteditUserDetails)
-//  },[props.geteditUserDetails])
+if(props.geteditUserDetails&&props.geteditUserDetails.userName){
+  setUserName(props.geteditUserDetails.userName);
+  setFirstName(props.geteditUserDetails.firstName);
+  setLastName(props.geteditUserDetails.lastName);
+  setUserType(props.geteditUserDetails.userType);
+  setEmail(props.geteditUserDetails.email);
+  setPhoneNo(props.geteditUserDetails.phoneNo);
+}
+// setUserName(props.geteditUserDetails.userName)
+ },[props.geteditUserDetails])
  const changeUserNameHandler=(e)=>{
-setUser({...user,userName:e.target.value})
+  setUserName(e.target.value)
  }
  const changeFirstNameHandler=(e)=>{
-  setUser({...user,firstName:e.target.value})
+  setFirstName(e.target.value)
 
 }
 const changeLastNameHandler=(e)=>{
-  setUser({...user,lastName:e.target.value})
+  setLastName(e.target.value)
 }
 const changeUserTypeHandler=(e)=>{
-  setUser({...user,userType:Number(e.target.value)})
+  setUserType(Number(e.target.value))
 }
 const changeEmailHandler=(e)=>{
-  setUser({...user,email:e.target.value})
+  setEmail(e.target.value)
 }
 const changephoneNumberHandler=(e)=>{
-  setUser({...user,phoneNo:e.target.value})
+  setPhoneNo(e.target.value)
 } 
-const onSubmitHandler=()=>{
-  console.log(user)
-  props.addAndUpdateUsers(user);
+const onSubmitHandler=()=>{ 
+  let user={
+    userName:userName,
+    firstName:firstName,
+    lastName:lastName,
+    email:email,
+    phoneNo:phoneNo,
+    userType:userType
+  }
+  if(props.geteditUserDetails&&props.geteditUserDetails.userName){
+    props.addAndUpdateUsers(user,'update');
+  }else{
+    props.addAndUpdateUsers(user,'create');
+  }
+ 
 }
     return(
         <div>
             <div className='row'>
             <div class="form-group col-sm-6">
              <label for="usr">User Name:</label>
-              <input type="text" value={user.userName} onChange={changeUserNameHandler} placeholder='User Name' name='userName' class="form-control"/>
+              <input type="text" value={userName} onChange={changeUserNameHandler} placeholder='User Name' name='userName' class="form-control"/>
             </div>
           <div class="form-group col-sm-6">
           <label for="usr">First Name:</label>
-          <input type="text" name='fname' onChange={changeFirstNameHandler} value={user.firstName} placeholder='First Name' class="form-control"/>
+          <input type="text" name='fname' onChange={changeFirstNameHandler} value={firstName} placeholder='First Name' class="form-control"/>
           </div>
           </div>
        <div className='row'>
        <div class="form-group col-sm-6">
        <label for="usr">Last Name:</label>
-       <input type="text" name='lName' onChange={changeLastNameHandler} value={user.lastName} placeholder='Last Name' class="form-control"/>
+       <input type="text" name='lName' onChange={changeLastNameHandler} value={lastName} placeholder='Last Name' class="form-control"/>
       </div>
      <div class="form-group col-sm-6">
        <label for="sel1">User Type:</label>
-       <select class="form-control" onChange={changeUserTypeHandler} value={user.userType}>
+       <select class="form-control" onChange={changeUserTypeHandler} value={userType}>
        <option>select User</option>
       <option value='1'>Admin</option>
       <option value='2'>Accountant</option> 
@@ -60,11 +85,11 @@ const onSubmitHandler=()=>{
    <div className='row'>
        <div class="form-group col-sm-6">
      <label for="usr">Email:</label>
-     <input type="text" name='email' onChange={changeEmailHandler} value={user.email} placeholder='Email' class="form-control"/>
+     <input type="text" name='email' onChange={changeEmailHandler} value={email} placeholder='Email' class="form-control"/>
    </div>
    <div class="form-group col-sm-6">
    <label for="usr">Phone Number:</label>
-   <input type="number" name='phno' onChange={changephoneNumberHandler} value={user.phoneNo} placeholder='Phone Number' class="form-control"/>
+   <input type="number" name='phno' onChange={changephoneNumberHandler} value={phoneNo} placeholder='Phone Number' class="form-control"/>
    </div>
    </div> 
    <div className='float-right'>
@@ -78,6 +103,6 @@ const mapStateToProps=(state)=>({
   geteditUserDetails:state.reducers.geteditUserDetails,
 })
 const mapDispatchToProps=(dispatch)=>({
-  addAndUpdateUsers:(data)=>dispatch(addAndUpdateUsers(data)),
+  addAndUpdateUsers:(data,type)=>dispatch(addAndUpdateUsers(data,type)),
 })
 export default connect(mapStateToProps,mapDispatchToProps) (CreateUser);
