@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column'; 
-import{getUsersList,editUsers} from '../actions/homeActions'
+import{getUsersList,editUsers,createUser} from '../actions/homeActions'
 import { connect } from 'react-redux';
 import ComponentDialog from './DialogBox/ComponentDialog';
 import CreateUser from './CreateUser';
@@ -24,7 +24,8 @@ props.getUsersList();
     const deleteUser=(data)=>{
 setShowAlertDialog(true)
 setresponseMsg('Are you sure you want to delete User')
-setDialogTitle('Confirm Message')
+setDialogTitle('Confirm Message'),
+setEditRowData(data.user_id)
 
     }
 const actionTemplate=(rowData)=>{ 
@@ -41,8 +42,10 @@ const onHide=()=>{
 const  createUser=()=>{
     setDialogTitle('Create User')
 setShowDialog(true)
+props.createUser();
 }
 const successMethod=()=>{ 
+  props.deleteUsers()
 }
     return (
         <div className='container '> 
@@ -85,7 +88,8 @@ const mapStateToProps=state=>({
 const mapDispatchToProps=dispatch=>({
     getUsersList:()=>dispatch(getUsersList()),
     editUsers:(data)=>dispatch(editUsers(data)),
-    deleteUsers:(id)=>dispatch(deleteUsers(id))
+    deleteUsers:(id)=>dispatch(deleteUsers(id)),
+    createUser:()=>dispatch(createUser())
 })
 export default connect(mapStateToProps,mapDispatchToProps)(UsersList);
  

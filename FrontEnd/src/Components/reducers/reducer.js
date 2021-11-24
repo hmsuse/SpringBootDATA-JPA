@@ -3,7 +3,8 @@ import Types from "../actions/action-types";
 const initialState = {
     isLoading: false,
     items: [],
-    hasError: false
+    hasError: false,
+    geteditUser:{userName:'',firstName:'',lastName:'',userType:'',email:'',phoneNo:''}
  };
  const reducers = (state = initialState, action) => { //es6 arrow function
     switch (action.type) {
@@ -43,6 +44,11 @@ const initialState = {
                          return{
                             ...state,
                          }
+                         case Types.CREATE_USER:
+                            return{
+                               ...state,
+                               geteditUserDetails:state.geteditUser
+                            }
        default:
           return state;
     }

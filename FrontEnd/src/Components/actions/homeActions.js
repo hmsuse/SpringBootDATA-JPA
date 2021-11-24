@@ -2,7 +2,11 @@ import Types from "./action-types"
 import axios from 'axios'; 
 import constants from "../Constants/constants";
 const exceptionHandler=(res)=>({
-    type:EXCEPTION_HANDLER,
+    type:Types.EXCEPTION_HANDLER,
+
+})
+const createUser=()=>({
+    type:Types.CREATE_USER,
 
 })
  const loginRequest = (payload) => {
@@ -20,9 +24,9 @@ const getUsersList= () => {
     }  
 }
 //add and update users list
-const addAndUpdateUsers=(data)=>{
+const addAndUpdateUsers=(data,type)=>{
     return function(dispatch){
-        axios.post(constants.api.addUpdateOfUser+`?action=create`,data)
+        axios.post(constants.api.addUpdateOfUser+`?action=${type}`,data)
         .then(res=>dispatch({tupe:Types.ADD_AND_UPDATE_USER,payload:res.data}))
         .catch(res=>dispatch(exceptionHandler(res)))
     }
@@ -48,10 +52,12 @@ const AddorUpdateFloor=()=>{
         .catch((res) => alert("exception"))
     }
 }
+
 export {
     loginRequest,
     getUsersList,
     addAndUpdateUsers,
     editUsers,
-    deleteUsers
+    deleteUsers,
+    createUser
 }
