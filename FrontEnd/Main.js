@@ -20,7 +20,7 @@ return(
         <Switch> 
         <Router> 
         {sessionStorage.userName?<Header/>:''}     
-           <Route exact  path='/'  component={Login}/>
+           <Route exact  path='/login'  component={Login}/>
            <Route exact path='/users' component={UsersList}/>
            
            <Route path='/floors' component={FloorsList}/>

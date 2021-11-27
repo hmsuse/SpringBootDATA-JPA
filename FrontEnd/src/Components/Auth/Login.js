@@ -23,7 +23,11 @@ class Login extends Component{
         this.setState({password:event.target.value})
     }
     sendValue=(e)=>{  
-    this.props.loginRequest(`?userName=${this.state.userName}&password=${this.state.password}`);
+        let obj={
+            userName:this.state.userName,
+            password:this.state.password
+        }
+    this.props.loginRequest(obj);
     }
     render(){ 
         const{handleSubmit}=this.props;

@@ -14,7 +14,7 @@ const nullifyService=()=>({
 })
  const loginRequest = (payload) => {
     return function (dispatch) {
-        axios.post(constants.api.siginin+payload)
+        axios.post(constants.api.siginin,payload)
             .then((response) => dispatch({type:Types.LOGIN_SUCCESS,payload:response.data}))
             .catch((res) => dispatch(exceptionHandler(res)))
     }  
