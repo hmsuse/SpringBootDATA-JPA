@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.5.6</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.springboot.jpa</groupId>
 	<artifactId>SpringBootDATA-JPA</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-<!-- 		<packaging>war</packaging>
- -->	
+	<!-- <packaging>war</packaging> -->
 	<name>SpringBootDATA-JPA</name>
 	<description>Demo project for Spring Boot with postgresql</description>
 	<properties>
@@ -33,96 +33,143 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
+		<!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
+		<!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>3.0-alpha-1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>5.3.13</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-rest</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.liquibase/liquibase-core -->
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-crypto -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-crypto</artifactId>
+			<version>5.6.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.1.0.Final</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
 <dependency>
-    <groupId>org.liquibase</groupId>
-    <artifactId>liquibase-core</artifactId>
+    <groupId>org.json</groupId>
+    <artifactId>json</artifactId>
+    <version>20180813</version>
 </dependency>
 		
 	</dependencies>
 
 	<build>
 		<plugins>
+
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>1.12.0</version>
+				<configuration>
+					<workingDirectory>frontend</workingDirectory>
+					<installDirectory>target</installDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<id>install node and npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+						<configuration>
+							<nodeVersion>v16.3.0</nodeVersion>
+							<npmVersion>8.1.0</npmVersion>
+						</configuration>
+					</execution>
+					<execution>
+						<id>npm install</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>
+								install
+							</arguments>
+						</configuration>
+
+					</execution>
+					<execution>
+						<id>npm run build</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments> run build</arguments>
+						</configuration>
+
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-resources</phase>
+						<configuration>
+							<target>
+								<copy todir="${project.build.directory}/classes/public">
+									<fileset dir="${project.basedir}/FrontEnd/dist"></fileset>
+								</copy>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>front-maven-plugin</artifactId>
-			<version>1.6</version>
-			<configuration>
-			<workingDirectory>frontend</workingDirectory>
-			<installDirectory>target</installDirectory>
-			</configuration>
-            <executions>
-			<execution>
-                    <id>install node and npm</id>
-					<goals>
-                        <goal>install-node-and-npm</goal>
-                    </goals> 
-                    <configuration> 
-                        <nodeVersion>v10.6.0</nodeVersion>
-						<npmVersion>6.9.0</npmVersion>
-                    </configuration> 
-                </execution>
-                <execution>
-                    <id>npm install</id> 
-					 <goals>
-                        <goal>npm</goal>
-                    </goals>
-                    <configuration>  
-                        <arguments>
-                           install
-                        </arguments>
-                    </configuration>
-                   
-                </execution>
-                <execution>
-                    <id>npm run build</id> 
-					 <goals>
-                        <goal>npm</goal>
-                    </goals>
-                    <configuration>
-                          <arguments> run build </arguments>
-                    </configuration>
-                   
-                </execution>
-            </executions>
-        </plugin>
-		<plugin>
-		<artifactId>maven-antrun-plugin</artifactId>
-		<executions>
-		<execution>
-		<phase>generate-resource</phase>
-		<configuration>
-		<target> 
-		<copy todir="${project.build.directory}/classes/public">
-		<fileset todir="${project.basedir}/FrontEnd/dist"></fileset>
-		</copy>
-		</target>
-		</configuration>
-		<goals>
-                        <goal>exec</goal>
-                    </goals>
-		</execution>
-		</executions>
-		</plugin>
 		</plugins>
 	</build>
-<reporting>
-<plugins>
-<plugin>
-<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>mave-jxr-plugin</artifactId>
-				<version>2.3</version>
-</plugin>
-</plugins>
-</reporting>
+	<!-- <reporting> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+		<artifactId>mave-jxr-plugin</artifactId> <version>2.3</version> </plugin> 
+		</plugins> </reporting> -->
 </project>

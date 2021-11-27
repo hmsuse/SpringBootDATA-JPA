@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,8 @@ import com.springboot.jpa.reposiroty.UserAccountDetailsRepository;
 public class UserDetailsController {
 	@Autowired
 	UserAccountDetailsRepository userRepo;
+	@Autowired
+	PasswordEncoder encoder;
 
 	@RequestMapping("/addUpdateOfUser")
 	@ResponseBody
@@ -32,6 +35,7 @@ public class UserDetailsController {
 		HashMap<String, Object> hm = new HashMap<>();
 		String action = request.getParameter("action");
 		try {
+			
 			if (action.equalsIgnoreCase("create")) {
 				UserAccountDetails ub = userRepo.findByName(used.getUserName());
 				if (ub==null) {
@@ -41,7 +45,7 @@ public class UserDetailsController {
 					ubean.setLastName(used.getLastName());
 					ubean.setUserName(used.getUserName());
 					ubean.setUserType(used.getUserType());
-					ubean.setPassword(used.getPhoneNo());
+					ubean.setPassword(encoder.encode(used.getPhoneNo()));
 					ubean.setStatusId(1);
 					ubean.setPhoneNumber(used.getPhoneNo());
 
@@ -63,7 +67,7 @@ public class UserDetailsController {
 					ubean.setLastName(used.getLastName());
 					ubean.setUserName(used.getUserName());
 					ubean.setUserType(used.getUserType());
-					ubean.setPassword(used.getPhoneNo());
+					ubean.setPassword(encoder.encode(used.getPhoneNo()));
 					ubean.setPhoneNumber(used.getPhoneNo());
 					ubean.setStatusId(1);
 					userRepo.save(ubean);

@@ -95,4 +95,7 @@ http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
 			</column>
 		</addColumn>
 	</changeSet>
+	<changeSet id="increase-password-length" author="asettypalli">
+  <modifyDataType tableName="user_account_details" columnName="password" newDataType="varchar(64)"/>
+</changeSet>
 </databaseChangeLog>
