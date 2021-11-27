@@ -53,7 +53,76 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>front-maven-plugin</artifactId>
+			<version>1.6</version>
+			<configuration>
+			<workingDirectory>frontend</workingDirectory>
+			<installDirectory>target</installDirectory>
+			</configuration>
+            <executions>
+			<execution>
+                    <id>install node and npm</id>
+					<goals>
+                        <goal>install-node-and-npm</goal>
+                    </goals> 
+                    <configuration> 
+                        <nodeVersion>v10.6.0</nodeVersion>
+						<npmVersion>6.9.0</npmVersion>
+                    </configuration> 
+                </execution>
+                <execution>
+                    <id>npm install</id> 
+					 <goals>
+                        <goal>npm</goal>
+                    </goals>
+                    <configuration>  
+                        <arguments>
+                           install
+                        </arguments>
+                    </configuration>
+                   
+                </execution>
+                <execution>
+                    <id>npm run build</id> 
+					 <goals>
+                        <goal>npm</goal>
+                    </goals>
+                    <configuration>
+                          <arguments> run build </arguments>
+                    </configuration>
+                   
+                </execution>
+            </executions>
+        </plugin>
+		<plugin>
+		<artifactId>maven-antrun-plugin</artifactId>
+		<executions>
+		<execution>
+		<phase>generate-resource</phase>
+		<configuration>
+		<target> 
+		<copy todir="${project.build.directory}/classes/public">
+		<fileset todir="${project.basedir}/FrontEnd/dist"></fileset>
+		</copy>
+		</target>
+		</configuration>
+		<goals>
+                        <goal>exec</goal>
+                    </goals>
+		</execution>
+		</executions>
+		</plugin>
 		</plugins>
 	</build>
-
+<reporting>
+<plugins>
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>mave-jxr-plugin</artifactId>
+				<version>2.3</version>
+</plugin>
+</plugins>
+</reporting>
 </project>
