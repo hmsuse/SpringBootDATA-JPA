@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+const htmlWebpackPlugin=new HtmlWebpackPlugin({template:'index.html'})
 const styleLoader = [{
         loader: 'style-loader'
     },
